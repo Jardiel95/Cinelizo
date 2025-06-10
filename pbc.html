@@ -23,33 +23,6 @@
       </form>
     </div>
   </div>
-
-  <script>
-    const formCadastro = document.getElementById('formCadastro');
-
-    formCadastro.addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      const nome = document.getElementById('nome').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const senha = document.getElementById('senha').value;
-
-      if(localStorage.getItem(email)) {
-        alert('Este email já está cadastrado.');
-        return;
-      }
-
-      const usuario = {
-        nome: nome,
-        senha: senha
-      };
-
-      localStorage.setItem(email, JSON.stringify(usuario));
-      alert('Cadastro realizado com sucesso!');
-      formCadastro.reset();
-    });
-  </script>
-
   <footer>
     <p>© 2025 Cinelizo. Todos os direitos reservados.</p>
   </footer>
