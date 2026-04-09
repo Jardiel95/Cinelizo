@@ -20,14 +20,12 @@ header {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  flex-wrap: wrap;
-  gap: 15px;
+  z-index: 100;
 }
 
 header h1 {
   font-size: clamp(1.5rem, 5vw, 2.2rem);
   font-weight: 900;
-  letter-spacing: 2px;
   color: #fff;
 }
 
@@ -35,27 +33,26 @@ nav ul {
   list-style: none;
   display: flex;
   gap: 15px;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
 nav ul li a {
   color: #fff;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1rem;
   padding: 8px 12px;
   border-radius: 6px;
   transition: 0.3s;
 }
 
+nav ul li a:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
 #s {
-  flex: 1;
   padding: 40px 5%;
   background: #181818;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
   width: 100%;
 }
 
@@ -65,24 +62,48 @@ nav ul li a {
   text-align: center;
 }
 
-.carrossel h2 {
-  margin-bottom: 20px;
-  font-size: clamp(1.2rem, 4vw, 2rem);
-  color: #e50914;
-}
-
 .slider {
   position: relative;
   overflow: hidden;
   border-radius: 12px;
+  background: #000;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
 }
 
 .slide {
   min-width: 100%;
-  height: auto;
   aspect-ratio: 16 / 9;
-  max-height: 500px;
   object-fit: cover;
+}
+
+button.anterior, button.proximo {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  z-index: 5;
+  border-radius: 50%;
+}
+
+button.anterior { left: 10px; }
+button.proximo { right: 10px; }
+
+.container-filmes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 5%;
+  gap: 40px;
 }
 
 .f {
@@ -90,72 +111,46 @@ nav ul li a {
   flex-direction: row;
   align-items: center;
   gap: 30px;
-  margin-top: 40px;
   width: 100%;
   max-width: 1000px;
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 15px;
 }
 
 .f img {
   width: 100%;
-  max-width: 500px;
-  height: auto;
-  border-radius: 20px;
-  padding: 0;
+  max-width: 300px;
+  border-radius: 10px;
 }
 
-.f p {
-  text-align: justify;
-  margin: 0;
+.info {
+  flex: 1;
 }
 
 .bt {
-  background-color: #ce151b;
-  min-height: 40px;
-  width: fit-content;
-  padding: 0 20px;
-  margin-top: 20px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: #e50914;
+  padding: 12px 25px;
+  margin-top: 15px;
+  border-radius: 8px;
   border: none;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.as {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
+.bt:hover { background-color: #b31217; }
+.as { color: white; text-decoration: none; font-weight: bold; }
 
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .f {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .f p {
-    text-align: center;
-  }
-
-  button.anterior, button.proximo {
-    padding: 5px 10px;
-    font-size: 1.5rem;
-  }
-
-  .slide {
-    height: 300px;
-  }
+  header { flex-direction: column; gap: 10px; }
+  .f { flex-direction: column; text-align: center; }
+  .f img { max-width: 100%; }
 }
 
 footer {
   background-color: #111;
   text-align: center;
-  padding: 15px 20px;
-  font-size: 0.9rem;
+  padding: 30px;
+  margin-top: auto;
   color: #999;
 }
