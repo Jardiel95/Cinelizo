@@ -1,45 +1,30 @@
 let slideIndex = 0;
 
-function mostrarAlerta() {
-  alert("Mais informações em breve!");
-}
-
-function validarLogin(event) {
-  event.preventDefault();
-  const usuario = document.getElementById("usuario").value;
-  const senha = document.getElementById("senha").value;
-
-  if (usuario === "" || senha === "") {
-    alert("Preencha todos os campos.");
-  } else {
-    alert("Login realizado com sucesso!");
-  }
-}
-
-function validarCadastro(event) {
-  event.preventDefault();
-  const nome = document.getElementById("nome").value;
-  const email = document.getElementById("email").value;
-  const senha = document.getElementById("senha").value;
-
-  if (nome === "" || email === "" || senha === "") {
-    alert("Preencha todos os campos.");
-  } else {
-    alert("Cadastro realizado com sucesso!");
-  }
-}
-
 function mudarSlide(direcao) {
-  const slides = document.querySelector('.slides');
-  const totalSlides = document.querySelectorAll('.slide').length;
-  slideIndex += direcao;
+    const slidesContainer = document.querySelector('.slides');
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
 
-  if (slideIndex >= totalSlides) slideIndex = 0;
-  if (slideIndex < 0) slideIndex = totalSlides - 1;
+    slideIndex += direcao;
 
-  slides.style.transform = `translateX(-${slideIndex * 100}%)`;
+    if (slideIndex >= totalSlides) {
+        slideIndex = 0;
+    } else if (slideIndex < 0) {
+        slideIndex = totalSlides - 1;
+    }
+
+    const offset = -slideIndex * 100;
+    slidesContainer.style.transform = `translateX(${offset}%)`;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  setInterval(() => mudarSlide(1), 5000);
+    let autoSlide = setInterval(() => mudarSlide(1), 5000);
+
+    const buttons = document.querySelectorAll('.anterior, .proximo');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            clearInterval(autoSlide);
+            autoSlide = setInterval(() => mudarSlide(1), 5000);
+        });
+    });
 });
